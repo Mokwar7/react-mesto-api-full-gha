@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.41.104
 
-Frontend https://...
+Frontend https://mokwar.nomoreparties.co/sign-in
 
-Backend https://...
+Backend https://api.mokwar.nomoreparties.co/sign-in

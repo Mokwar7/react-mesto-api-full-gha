@@ -88,7 +88,7 @@ class Api{
 }
 
 export const api = new Api({
-    url: 'https://nomoreparties.co/v1/cohort-64/',
+    url: 'https://api.mokwar.nomoreparties.co/',
     headers: {
       authorization: '3e25cf54-975f-4847-af07-471e48c9313d',
       'Content-Type': 'application/json'

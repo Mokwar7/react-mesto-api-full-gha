@@ -21,7 +21,8 @@ const app = express();
 const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
-  'localhost:3000'
+  'localhost:3000',
+  'https://mokwar.nomoreparties.co'
 ];
 
 const {
@@ -42,7 +43,7 @@ mongoose.connect('mongodb://0.0.0.0:27017/mestodb', {
 app.use(function(req, res, next) {
   const { origin } = req.headers;
   const { method } = req;
-  const requestHeaders = req.headers['access-control-request-headers']; 
+  const requestHeaders = req.headers['access-control-request-headers'];
 
   const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";
 
@@ -57,7 +58,7 @@ app.use(function(req, res, next) {
   }
 
   next();
-}); 
+});
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
