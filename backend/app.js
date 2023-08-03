@@ -16,6 +16,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
+const cors = require("cors");
+
 const app = express();
 
 const allowedCors = [
@@ -40,25 +42,7 @@ mongoose.connect('mongodb://0.0.0.0:27017/mestodb', {
     console.log(err);
   });
 
-app.use(function(req, res, next) {
-  const { origin } = req.headers;
-  const { method } = req;
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    return res.end();
-  }
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    return res.end();
-  }
-
-  next();
-});
+app.use(cors({ origin: ["http://localhost:3000", "https://mokwar.nomoreparties.co", "http://mokwar.nomoreparties.co"] }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
