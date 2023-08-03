@@ -48,7 +48,4 @@ export default class Auth {
 
 export const auth = new Auth({
     url: 'https://api.mokwar.nomoreparties.co/',
-    headers: {
-      'Content-Type': 'application/json'
-    },
 })
