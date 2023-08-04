@@ -8,7 +8,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext)
   const { avatar='https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png', name='Жан жак-ив кусто', about='немного о себе' } = currentUser.data
-  
+
   return(
         <main>
             <section className="profile">

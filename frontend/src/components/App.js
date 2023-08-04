@@ -68,19 +68,19 @@ function App() {
     setSelectedCard(card)
   }
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id)
+    const isLiked = card.likes.some(i => i === currentUser.data._id)
 
     if (!isLiked) {
       api.addLike(card._id)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
       })
       .catch(err => {console.log(err)})
     }
     else {
       api.removeLike(card._id)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
       })
       .catch(err => {console.log(err)})
     }
@@ -95,6 +95,7 @@ function App() {
   function handleUpdateUser(data) {
     api.changeeProfileInfo(data)
     .then((userInfo) => {
+      console.log(userInfo)
       setCurrentUser(userInfo)
       closeAllPopups()
     })
@@ -111,7 +112,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     api.addNewCard(data)
     .then((newCard) => {
-      setCards([newCard, ...cards]);
+      setCards([newCard.data, ...cards]);
       closeAllPopups()
     })
     .catch(err => {console.log(err)})
