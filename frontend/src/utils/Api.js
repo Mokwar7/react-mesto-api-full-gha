@@ -1,4 +1,4 @@
-class Api{
+export default class Api{
     constructor(settings) {
         this._url = settings.url
         this._headers = settings.headers
@@ -86,11 +86,3 @@ class Api{
         .then(this._checkResponse)
     }
 }
-
-export const api = new Api({
-    url: 'https://api.mokwar.nomoreparties.co/',
-    headers: {
-      authorization: '3e25cf54-975f-4847-af07-471e48c9313d',
-      'Content-Type': 'application/json'
-    }
-})

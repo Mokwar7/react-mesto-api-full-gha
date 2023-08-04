@@ -7,7 +7,7 @@ import Footer from './Footer.js'
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { api } from '../utils/Api';
+import Api from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
@@ -15,7 +15,7 @@ import ProtectedRouteElement from './ProtectedRoute';
 import Login from './Login'
 import Register from './Register'
 import InfoTooltip from './InfoTooltip';
-import {auth} from '../utils/Auth';
+import Auth from '../utils/Auth';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -30,6 +30,20 @@ function App() {
   const [isCorrectRegister, setIsCorrectRegister] = React.useState(false)
   const [email, setEmail] = React.useState('')
   const navigate = useNavigate()
+  const auth = new Auth({
+    url: 'https://api.mokwar.nomoreparties.co',
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization" : localStorage.getItem('jwt') ? localStorage.getItem('jwt') : ''
+    }
+  })
+  const api = new Api({
+    url: 'https://api.mokwar.nomoreparties.co',
+    headers: {
+      'Content-Type': 'application/json',
+      "Authorization" : localStorage.getItem('jwt') ? localStorage.getItem('jwt') : ''
+    }
+  })
 
   
 
@@ -131,21 +145,7 @@ function App() {
   }
 
 
-  React.useEffect(() => {
-    api.getUserInfo()
-    .then((userInfo) => {
-      setCurrentUser(userInfo)
-    })
-    .catch(err => {console.log(err)})
-  }, [])
 
-  React.useEffect(() => {
-    api.getInitialCards()
-    .then((cardsArr) => {
-      setCards(cardsArr);
-    })
-    .catch(err => {console.log(err)})
-  }, [])
   React.useEffect(() => {
     if (localStorage.getItem('jwt')) {
       auth.checkJWT(localStorage.getItem('jwt'))
@@ -153,6 +153,12 @@ function App() {
         setIsLoggedIn(true)
         navigate('/', {replace: true})
         setEmail(data.data.email)
+        setCurrentUser(data)
+        api.getInitialCards()
+        .then((cardsArr) => {
+          setCards(cardsArr.data);
+        })
+        .catch(err => {console.log(err)})
       })
       .catch(err => {console.log(err)})
     }

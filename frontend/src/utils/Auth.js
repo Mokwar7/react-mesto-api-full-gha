@@ -45,7 +45,3 @@ export default class Auth {
             .then(this._checkResponse)
     }
 }
-
-export const auth = new Auth({
-    url: 'https://api.mokwar.nomoreparties.co/',
-})

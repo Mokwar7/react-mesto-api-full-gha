@@ -130,20 +130,13 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: 3600 * 24 * 7 },
+        { expiresIn: "7d" },
       );
 
       if (!token) {
         throw new NotCorrectTokenError('Ваш токен некорректный');
       }
-
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600 * 24 * 7,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .send({ message: 'авторизация прошла успешно' });
+      res.send({ token });
     })
     .catch(next);
 };

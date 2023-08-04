@@ -4,6 +4,8 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
+const cors = require('cors');
+
 const { celebrate, Joi, errors } = require('celebrate');
 
 const cookieParser = require('cookie-parser');
@@ -14,18 +16,13 @@ const auth = require('./middlewares/auth');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
-
-const cors = require("cors");
+const { PORT = 3001 } = process.env;
 
 const app = express();
 
-const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-  'localhost:3000',
-  'https://mokwar.nomoreparties.co'
-];
+app.use(cors({
+  origin: ["https://mokwar.nomoreparties.co", "http://localhost:3000", "http://mokwar.nomoreparties.co"]
+}));
 
 const {
   login,
@@ -47,7 +44,6 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.options('*', cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
