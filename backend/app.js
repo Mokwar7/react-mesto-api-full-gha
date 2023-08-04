@@ -21,7 +21,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors({
-  origin: ["https://mokwar.nomoreparties.co", "http://localhost:3000", "http://mokwar.nomoreparties.co"]
+  origin: ['https://mokwar.nomoreparties.co', 'http://localhost:3000', 'http://mokwar.nomoreparties.co'],
 }));
 
 const {

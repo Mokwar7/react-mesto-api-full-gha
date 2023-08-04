@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.41.104
+IP-адрес 158.160.114.138
 
 Frontend https://mokwar.nomoreparties.co/sign-in
 
