@@ -31,14 +31,14 @@ function App() {
   const [email, setEmail] = React.useState('')
   const navigate = useNavigate()
   const auth = new Auth({
-    url: 'https://api.mokwar.nomoreparties.co',
+    url: 'https://api.mokwar.nomoreparties.co/',
     headers: {
         'Content-Type': 'application/json',
         "Authorization" : localStorage.getItem('jwt') ? localStorage.getItem('jwt') : ''
     }
   })
   const api = new Api({
-    url: 'https://api.mokwar.nomoreparties.co',
+    url: 'https://api.mokwar.nomoreparties.co/',
     headers: {
       'Content-Type': 'application/json',
       "Authorization" : localStorage.getItem('jwt') ? localStorage.getItem('jwt') : ''
