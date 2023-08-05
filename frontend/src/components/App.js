@@ -45,8 +45,6 @@ function App() {
     }
   })
 
-  
-
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
   }
@@ -134,8 +132,17 @@ function App() {
     .then((token) => {
       localStorage.setItem('jwt', token.token)
       setIsLoggedIn(true)
-      navigate('/', {replace: true})
       setEmail(data.email)
+      Promise.all([
+        api.getUserInfo(),
+        api.getInitialCards(),
+      ])
+        .then(([userData, cards]) => {
+          setCurrentUser(userData);
+          setCards(cards.data);
+          navigate('/', {replace: true})
+        })
+        .catch(err => console.log(err))
     })
     .catch((err) => {
       console.log(err)
@@ -164,8 +171,6 @@ function App() {
       .catch(err => {console.log(err)})
     }
   }, [])
-
-
   
   return (
     <CurrentUserContext.Provider value={currentUser}>

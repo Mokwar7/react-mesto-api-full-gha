@@ -11,18 +11,26 @@ export default class Api{
     }
 
     getUserInfo() {
+        const jwt = localStorage.getItem('jwt')
         return fetch(`${this._url}users/me`, {
             method: 'GET',
-            headers: this._headers
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization" : jwt,
+            }
         })
             .then(this._checkResponse)
             
     }
 
     getInitialCards() {
+        const jwt = localStorage.getItem('jwt')
         return fetch(`${this._url}cards`, {
             method: 'GET',
-            headers: this._headers
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization" : jwt,
+            }
         })
         .then(this._checkResponse)
     }
