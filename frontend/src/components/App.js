@@ -93,7 +93,6 @@ function App() {
   function handleUpdateUser(data) {
     api.changeeProfileInfo(data)
     .then((userInfo) => {
-      console.log(userInfo)
       setCurrentUser(userInfo)
       closeAllPopups()
     })
@@ -145,6 +144,7 @@ function App() {
         .catch(err => console.log(err))
     })
     .catch((err) => {
+      setIsInfoPopupOpen(true)
       console.log(err)
     })
   }
